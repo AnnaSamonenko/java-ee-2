@@ -39,13 +39,6 @@
             </f:facet>
             #{i.address}
         </h:column>
-
-        <h:column>
-            <f:facet name="header">
-                Share name
-            </f:facet>
-            #{i.idshare}
-        </h:column>
     </h:dataTable>
 
     <h1>Shares:</h1>
@@ -77,6 +70,13 @@
                 Type
             </f:facet>
             #{i.type}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Owner
+            </f:facet>
+            #{i.buyer.surname}
         </h:column>
 
     </h:dataTable>

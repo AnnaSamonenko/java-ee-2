@@ -1,12 +1,15 @@
 package enteties;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table
+@Table(name = "share")
 @ManagedBean(name = "share")
 @RequestScoped
 public class Share {
@@ -20,13 +23,35 @@ public class Share {
 
     private String type;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idbuyer", nullable = true)
+    @NotFound(action= NotFoundAction.IGNORE)
+    private Buyer buyer;
+
     public Share() {
+        buyer = new Buyer();
     }
 
     public Share(String name, BigDecimal price, String type) {
         this.name = name;
         this.type = type;
         this.price = price;
+
+    }
+
+    public Share(String name, BigDecimal price, String type, Buyer buyer) {
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.buyer = buyer;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     public int getId() {
@@ -59,5 +84,18 @@ public class Share {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Share)) return false;
+        Share otherShare = (Share) other;
+        if (otherShare.getId() == this.getId()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

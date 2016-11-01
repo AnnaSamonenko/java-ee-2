@@ -4,18 +4,26 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Анна on 20/10/2016.
  */
 public class ShareTest {
-    private ShareDAOimpl shdao = new ShareDAOimpl();
+    ShareDAOimpl shdao = new ShareDAOimpl();
+
     @Test
-    public void testInsert(){
-        Share sh = new Share("NameTest",new BigDecimal(7779), "TypeTest");
+    public void testShare() {
+        Share sh = new Share("NameTest", new BigDecimal(7779), "TypeTest");
         shdao.create(sh);
-        Share shx = shdao.read(sh.getId());
-        assertSame(sh, shx) ;
+        assertEquals(sh, shdao.read(sh.getId()));
+
+        sh.setName("UpdateTest");
+        shdao.update(sh.getId(), sh);
+        assertEquals(sh, shdao.read(sh.getId()));
+
+        shdao.delete(sh.getId());
+        assertNull(shdao.read(sh.getId()));
     }
 }

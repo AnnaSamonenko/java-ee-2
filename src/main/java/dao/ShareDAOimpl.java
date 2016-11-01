@@ -19,6 +19,7 @@ public class ShareDAOimpl implements ShareDAO {
     private static final Logger log = Logger.getLogger(ShareDAOimpl.class);
 
     public void create(Share sh) {
+        EntityManager entitymanager = emfactory.createEntityManager();
         entitymanager.getTransaction().begin();
         entitymanager.persist(sh);
         entitymanager.getTransaction().commit();
@@ -27,6 +28,7 @@ public class ShareDAOimpl implements ShareDAO {
     }
 
     public void update(int id, Share update) {
+        EntityManager entitymanager = emfactory.createEntityManager();
         Share sh = entitymanager.find(Share.class, id);
         sh.setType(update.getType());
         sh.setName(update.getName());
@@ -39,6 +41,7 @@ public class ShareDAOimpl implements ShareDAO {
     }
 
     public void delete(int id) {
+        EntityManager entitymanager = emfactory.createEntityManager();
         Share sh = entitymanager.find(Share.class, id);
         entitymanager.getTransaction().begin();
         entitymanager.remove(sh);
@@ -47,11 +50,14 @@ public class ShareDAOimpl implements ShareDAO {
     }
 
     public List<Share> findAllShares() {
+        //EntityManager entitymanager = emfactory.createEntityManager();
         Query query = entitymanager.createQuery("Select sh from Share sh");
+        //entitymanager.close();
         return (ArrayList<Share>) query.getResultList();
     }
 
     public Share read(int id){
+        EntityManager entitymanager = emfactory.createEntityManager();
         Share sh = entitymanager.find(Share.class, id);
         return sh;
     }

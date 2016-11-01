@@ -35,6 +35,7 @@ public class BuyerDAOimpl implements BuyerDAO {
     }
 
     public void update(int id, Buyer update) {
+        EntityManager entitymanager = emfactory.createEntityManager();
         Buyer b = entitymanager.find(Buyer.class, id);
         b.setAddress(update.getAddress());
         b.setName(update.getName());
@@ -47,6 +48,7 @@ public class BuyerDAOimpl implements BuyerDAO {
     }
 
     public void delete(int id) {
+        EntityManager entitymanager = emfactory.createEntityManager();
         Buyer b = entitymanager.find(Buyer.class, id);
         entitymanager.getTransaction().begin();
         entitymanager.remove(b);
