@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "share")
@@ -28,8 +30,13 @@ public class Share {
     @NotFound(action= NotFoundAction.IGNORE)
     private Buyer buyer;
 
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name = "stock_exchange")
+    private List<Exchange> exchanges;
+
     public Share() {
         buyer = new Buyer();
+        exchanges = new ArrayList<>();
     }
 
     public Share(String name, BigDecimal price, String type) {
@@ -84,6 +91,14 @@ public class Share {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<Exchange> getExchanges() {
+        return exchanges;
+    }
+
+    public void setExchanges(List<Exchange> exchanges) {
+        this.exchanges = exchanges;
     }
 
     @Override

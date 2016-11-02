@@ -50,9 +50,7 @@ public class ShareDAOimpl implements ShareDAO {
     }
 
     public List<Share> findAllShares() {
-        //EntityManager entitymanager = emfactory.createEntityManager();
         Query query = entitymanager.createQuery("Select sh from Share sh");
-        //entitymanager.close();
         return (ArrayList<Share>) query.getResultList();
     }
 

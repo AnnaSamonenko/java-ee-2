@@ -1,7 +1,5 @@
 package enteties;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
@@ -31,8 +29,7 @@ public class Buyer {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
-    @Cascade(CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "buyer")
     private List<Share> shares= new LinkedList<>();
 
     public Buyer() {

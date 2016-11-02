@@ -14,7 +14,7 @@
         Name: <h:inputText value="#{buyer.name}"/><br/><br/>
         Surname: <h:inputText value="#{buyer.surname}"/><br/><br/>
         Address: <h:inputText value="#{buyer.address}"/><br/><br/>
-        ID of stock: <h:inputText value="#{buyer.idshare}"/><br/><br/>
+
         ID of buyer: <h:inputText value="#{buyer.id}"/><br/><br/>
         <h:commandButton value="Update" action="#{buyerBean.update(buyer.id, buyer)}"/>
 
@@ -22,6 +22,8 @@
         Company: <h:inputText value="#{share.name}"/><br/><br/>
         Price: <h:inputText value="#{share.price}"/><br/><br/>
         Type: <h:inputText value="#{share.type}"/><br/><br/>
+        ID of buyer: <h:inputText value="#{share.buyer.id}"/><br/><br/>
+
         ID: <h:inputText value="#{share.id}"/><br/><br/>
         <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
     </h:form>
