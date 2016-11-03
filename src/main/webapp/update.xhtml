@@ -22,10 +22,14 @@
         Company: <h:inputText value="#{share.name}"/><br/><br/>
         Price: <h:inputText value="#{share.price}"/><br/><br/>
         Type: <h:inputText value="#{share.type}"/><br/><br/>
-        ID of buyer: <h:inputText value="#{share.buyer.id}"/><br/><br/>
-
-        ID: <h:inputText value="#{share.id}"/><br/><br/>
+        ID of share: <h:inputText value="#{share.id}"/><br/><br/>
         <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
+
+        <h1>Exchange:</h1>
+        Name of exchange: <h:inputText value="#{exchange.nameexchange}"/><br/><br/>
+        ID of exchange: <h:inputText value="#{exchange.idexchange}"/><br/><br/>
+        <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
+
     </h:form>
 </h:body>
 </html>

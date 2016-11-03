@@ -23,7 +23,13 @@
         Price: <h:inputText value="#{share.price}"/><br/><br/>
         Type: <h:inputText value="#{share.type}"/><br/><br/>
         Buyer: <h:inputText value="#{share.buyer.id}"/><br/><br/>
-        <h:commandButton value="Add stock" action="#{shareBean.create(share)}"/>
+        <h:commandButton value="Add stock" action="#{shareBean.create(share, share.buyer.id)}"/>
+    </h:form>
+
+    <h1>Exchange: </h1>
+    <h:form>
+        Name: <h:inputText value="#{exchange.nameexchange}"/><br/><br/>
+        <h:commandButton value="Add exchange" action="#{exchangeBean.create(exchange)}"/>
     </h:form>
 </h:body>
 </html>

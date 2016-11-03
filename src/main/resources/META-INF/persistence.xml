@@ -3,11 +3,16 @@
 
     <persistence-unit name="Share">
         <class>enteties.Share</class>
+        <class>enteties.BankAccount </class>
+        <class>enteties.Buyer</class>
+        <class>enteties.Exchange</class>
         <class>dao.ShareDAO</class>
         <class>dao.ShareDAOimpl</class>
-        <class>enteties.Buyer</class>
         <class>dao.BuyerDAO</class>
         <class>dao.BuyerDAOimpl</class>
+        <class>dao.ExchangeDAO</class>
+        <class>dao.ExchangeDAOimpl</class>
+
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>

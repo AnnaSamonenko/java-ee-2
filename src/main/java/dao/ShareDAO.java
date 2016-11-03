@@ -5,7 +5,7 @@ import enteties.Share;
 import java.util.List;
 
 public interface ShareDAO {
-    void create(Share sh);
+    void create(Share sh, int idbuyer);
 
     List<Share> findAllShares();
 

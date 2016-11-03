@@ -9,7 +9,8 @@
     <title> Display shares </title>
 </h:head>
 <h:body>
-    <h1>Buyers:</h1>
+    <!-- Owner-->
+    <h1>Owner:</h1>
     <h:dataTable value="#{buyerBean.findAllBuyers()}" var="i" border="1">
 
         <h:column>
@@ -39,7 +40,22 @@
             </f:facet>
             #{i.address}
         </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Stocks
+            </f:facet>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Bank Account
+            </f:facet>
+            #{i.bankAccount.money_on_bank_account}
+        </h:column>
     </h:dataTable>
+    <!-- SHARES-->
 
     <h1>Shares:</h1>
     <h:dataTable value="#{shareBean.findAllShares()}" var="i" border="1">
@@ -79,6 +95,44 @@
             #{i.buyer.surname}
         </h:column>
 
+        <h:column>
+            <f:facet name="header">
+                Exchanges
+            </f:facet>
+            <ui:repeat var="item" value="#{i.exchanges}"> #{item.name}<br/> </ui:repeat>
+        </h:column>
     </h:dataTable>
+
+    <!-- EXCHANGE-->
+    <h1>Exchange:</h1>
+    <h:dataTable value="#{exchangeBean.findAllExchanges()}" var="i" border="1">
+
+        <h:column>
+            <f:facet name="header">
+                id
+            </f:facet>
+            #{i.idexchange}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Name of exchange
+            </f:facet>
+            #{i.nameexchange}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Stocks
+            </f:facet>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
+        </h:column>
+    </h:dataTable>
+
+    <!-- Links on pages for adding, updating, deleting -->
+    <h6>Operation on tables: </h6>
+    <h:link value="Insert" outcome="insert"/><br/>
+    <h:link value="Update" outcome="update"/><br/>
+    <h:link value="Delete" outcome="delete"/><br/>
 </h:body>
 </html>

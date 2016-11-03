@@ -1,5 +1,6 @@
 package dao;
 
+import enteties.Buyer;
 import enteties.Share;
 import org.apache.log4j.Logger;
 
@@ -18,9 +19,11 @@ public class ShareDAOimpl implements ShareDAO {
     // logging
     private static final Logger log = Logger.getLogger(ShareDAOimpl.class);
 
-    public void create(Share sh) {
+    public void create(Share sh, int idbuyer) {
         EntityManager entitymanager = emfactory.createEntityManager();
         entitymanager.getTransaction().begin();
+        Buyer b = entitymanager.find(Buyer.class, idbuyer);
+        b.getShares().add(sh);
         entitymanager.persist(sh);
         entitymanager.getTransaction().commit();
         entitymanager.close();
@@ -54,7 +57,7 @@ public class ShareDAOimpl implements ShareDAO {
         return (ArrayList<Share>) query.getResultList();
     }
 
-    public Share read(int id){
+    public Share read(int id) {
         EntityManager entitymanager = emfactory.createEntityManager();
         Share sh = entitymanager.find(Share.class, id);
         return sh;

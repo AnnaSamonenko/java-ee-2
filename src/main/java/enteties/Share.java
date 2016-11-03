@@ -1,8 +1,5 @@
 package enteties;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
@@ -19,24 +16,27 @@ public class Share {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "type")
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idbuyer", nullable = true)
-    @NotFound(action= NotFoundAction.IGNORE)
-    private Buyer buyer;
+    @JoinColumn(name = "idbuyer")
+    private Buyer buyer = new Buyer();
 
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name = "stock_exchange")
-    private List<Exchange> exchanges;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "stock_exchange", joinColumns = {
+            @JoinColumn(name = "idstock", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "idexchange",
+                    nullable = false, updatable = false)})
+    private List<Exchange> exchanges = new ArrayList<>();
 
     public Share() {
-        buyer = new Buyer();
-        exchanges = new ArrayList<>();
     }
 
     public Share(String name, BigDecimal price, String type) {
