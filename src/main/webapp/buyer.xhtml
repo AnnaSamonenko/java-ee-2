@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <!-- Owner-->
+    <h1>Owner:</h1>
+    <h:dataTable value="#{buyerBean.findAllBuyers()}" var="i" border="1">
+
+        <h:column>
+            <f:facet name="header">
+                id
+            </f:facet>
+            #{i.id}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Name
+            </f:facet>
+            #{i.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Surname
+            </f:facet>
+            #{i.surname}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Address
+            </f:facet>
+            #{i.address}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Stocks
+            </f:facet>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Bank Account
+            </f:facet>
+            #{i.bankAccount.moneyOnBankAccount}
+        </h:column>
+    </h:dataTable>
+
+    <h1>Add new owners: </h1>
+    <h:form>
+        Name of owner: <h:inputText value="#{buyer.name}"/><br/><br/>
+        Surname of owner: <h:inputText value="#{buyer.surname}"/><br/><br/>
+        Address of owner: <h:inputText value="#{buyer.address}"/><br/><br/>
+        <h:commandButton value="Add buyer" action="#{buyerBean.create(buyer)}"/>
+    </h:form>
+
+    <h1>Update Info about Owner:</h1>
+    Name: <h:inputText value="#{buyer.name}"/><br/><br/>
+    Surname: <h:inputText value="#{buyer.surname}"/><br/><br/>
+    Address: <h:inputText value="#{buyer.address}"/><br/><br/>
+
+    ID of buyer: <h:inputText value="#{buyer.id}"/><br/><br/>
+    <h:commandButton value="Update" action="#{buyerBean.update(buyer.id, buyer)}"/>
+
+    <h1>Delete owner:</h1>
+    <h:form>
+        ID: <h:inputText value="#{buyer.id}"/><br/><br/>
+        <h:commandButton value="Delete" action="#{buyerBean.delete(buyer.id)}"/>
+    </h:form>
+
+    <h1>Add bank account: </h1>
+    <h:form>
+        Input id of Buyer, that you want add bank account: <h:inputText value="#{buyer.id}"/><br/><br/>
+        <h:commandButton value="Add bank account to buyer" action="#{bankAccountBean.create(buyer.id)}"/>
+    </h:form>
+
+    <h1>Add money on bank account: </h1>
+    <h:form>
+        Input id of Buyer, that you want to add money: <h:inputText value="#{buyer.id}"/><br/><br/>
+        Input amount of money that you want to add: <h:inputText value="#{bankAccountBean.operationMoney}"/><br/><br/> <!--money to add -->
+        <h:commandButton value="Add money on account of buyer" action="#{bankAccountBean.addMoney(buyer.id, bankAccountBean.operationMoney)}"/>
+    </h:form>
+</f:view>
+</html>

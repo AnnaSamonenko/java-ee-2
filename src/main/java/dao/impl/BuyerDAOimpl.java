@@ -1,9 +1,9 @@
-package dao;
+package dao.impl;
 
+import dao.interfaces.BuyerDAO;
 import enteties.Buyer;
 import org.apache.log4j.Logger;
 
-import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,10 +11,6 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Анна on 19/10/2016.
- */
-@ManagedBean(name = "buyerBean")
 public class BuyerDAOimpl implements BuyerDAO {
 
     private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Share");

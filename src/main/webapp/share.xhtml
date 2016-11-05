@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h1>Shares:</h1>
+    <h:dataTable value="#{shareBean.findAllShares()}" var="i" border="1">
+
+        <h:column>
+            <f:facet name="header">
+                id
+            </f:facet>
+            #{i.id}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Company
+            </f:facet>
+            #{i.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Price
+            </f:facet>
+            #{i.price}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Type
+            </f:facet>
+            #{i.type}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Owner
+            </f:facet>
+            #{i.buyer.surname}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Exchanges
+            </f:facet>
+            <ui:repeat var="item" value="#{i.exchanges}"> #{item.name}<br/> </ui:repeat>
+        </h:column>
+    </h:dataTable>
+
+    <h1>Add new share:</h1>
+    <h:form>
+        Share price: <h:inputText value="#{share.price}"/><br/><br/>
+        Share type: <h:inputText value="#{share.type}"/><br/><br/>
+        Owner of share: <h:inputText value="#{share.buyer.id}"/><br/><br/>
+        Company of share: <h:inputText value="#{share.company.id}"/><br/><br/>
+        <h:commandButton value="Add stock" action="#{shareBean.create(share, share.company.id, share.buyer.id)}"/>
+    </h:form>
+
+    <h1>Update info about Share:</h1>
+    Company: <h:inputText value="#{share.company.companyName}"/><br/><br/>
+    Price: <h:inputText value="#{share.price}"/><br/><br/>
+    Type: <h:inputText value="#{share.type}"/><br/><br/>
+    ID of share: <h:inputText value="#{share.id}"/><br/><br/>
+    <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
+
+    <h1>Delete Share:</h1>
+    <h:form>
+        ID: <h:inputText value="#{share.id}"/><br/><br/>
+        <h:commandButton value="Delete" action="#{shareBean.delete(share.id)}"/>
+    </h:form>
+</f:view>
+</html>

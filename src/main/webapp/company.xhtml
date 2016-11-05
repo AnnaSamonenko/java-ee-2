@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h1>Companies:</h1>
+    <h:dataTable value="#{companyBean.findAllCompanies()}" var="i" border="1">
+
+        <h:column>
+            <f:facet name="header">
+                id
+            </f:facet>
+            #{i.id}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Name of company
+            </f:facet>
+            #{i.companyName}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Location
+            </f:facet>
+            #{i.companyLocation}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Company foundation year
+            </f:facet>
+            #{i.companyFoundationYear}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Company foundation year
+            </f:facet>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.buyer.name}<br/> </ui:repeat>
+        </h:column>
+    </h:dataTable>
+
+    <h1>Add company to list above:</h1>
+    <h:form>
+        Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
+        Company location: <h:inputText value="#{company.companyLocation}"/><br/><br/>
+        Company foundation year: <h:inputText value="#{company.companyFoundationYear}"/><br/><br/>
+        <h:commandButton value="Add stock" action="#{companyBean.create(company)}"/>
+    </h:form>
+</f:view>
+</html>

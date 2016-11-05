@@ -1,9 +1,9 @@
-package dao;
+package dao.interfaces;
 
 import enteties.BankAccount;
 
 public interface BankAccountDAO {
-    void create(BankAccount bankAccount);
+    void create(int buyerID);
 
     void update(int id, BankAccount bankAccount);
 

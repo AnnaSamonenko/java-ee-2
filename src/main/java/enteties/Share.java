@@ -1,7 +1,6 @@
 package enteties;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,24 +9,25 @@ import java.util.List;
 @Entity
 @Table(name = "share")
 @ManagedBean(name = "share")
-@RequestScoped
 public class Share {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "share_id")
     private int id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "price")
+    @Column(name = "share_price")
     private BigDecimal price;
 
-    @Column(name = "type")
+    @Column(name = "share_type")
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idbuyer")
-    private Buyer buyer = new Buyer();
+    private Buyer buyer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "stock_exchange", joinColumns = {
@@ -36,21 +36,22 @@ public class Share {
                     nullable = false, updatable = false)})
     private List<Exchange> exchanges = new ArrayList<>();
 
-    public Share() {
-    }
+    public Share(){}
 
-    public Share(String name, BigDecimal price, String type) {
-        this.name = name;
-        this.type = type;
+    public Share(BigDecimal price, String type, Buyer buyer, Company company, List<Exchange> exchanges) {
         this.price = price;
-
-    }
-
-    public Share(String name, BigDecimal price, String type, Buyer buyer) {
-        this.name = name;
         this.type = type;
-        this.price = price;
         this.buyer = buyer;
+        this.company = company;
+        this.exchanges = exchanges;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Buyer getBuyer() {
@@ -67,14 +68,6 @@ public class Share {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public BigDecimal getPrice() {

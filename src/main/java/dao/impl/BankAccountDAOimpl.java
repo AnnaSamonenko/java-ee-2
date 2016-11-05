@@ -1,6 +1,8 @@
-package dao;
+package dao.impl;
 
+import dao.interfaces.BankAccountDAO;
 import enteties.BankAccount;
+import enteties.Buyer;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
@@ -12,9 +14,12 @@ public class BankAccountDAOimpl implements BankAccountDAO {
     private EntityManager entitymanager = emfactory.createEntityManager();
     private static final Logger log = Logger.getLogger(BankAccountDAOimpl.class);
 
-    public void create(BankAccount bankAccount) {
+    public void create(int buyerID) {
+        BankAccount bankAccount = new BankAccount(0);
         entitymanager.getTransaction().begin();
+        Buyer buyer = entitymanager.find(Buyer.class, buyerID);
         entitymanager.persist(bankAccount);
+        buyer.setBankAccount(bankAccount);
         entitymanager.getTransaction().commit();
         entitymanager.close();
         log.info("Create bank account with id: " + bankAccount.getIdBankAccount());

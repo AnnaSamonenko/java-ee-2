@@ -1,36 +1,34 @@
 package enteties;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @Table(name = "buyer")
-@ManagedBean(name = "buyer")
-@RequestScoped
+@ManagedBean(name="buyer")
 public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idbuyer")
     private int id;
 
-    @Column(name = "nameb")
+    @Column(name = "buyer_name")
     private String name;
 
-    @Column(name = "surnameb")
+    @Column(name = "buyer_surname")
     private String surname;
 
-    @Column(name = "address")
+    @Column(name = "buyer_address")
     private String address;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "buyer")
     private List<Share> shares = new LinkedList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_bank_account")
-    private BankAccount bankAccount = new BankAccount();
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_bank_account", nullable = true)
+    private BankAccount bankAccount;
 
     public Buyer() {
     }

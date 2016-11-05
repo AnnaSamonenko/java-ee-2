@@ -1,11 +1,11 @@
-package dao;
+package dao.interfaces;
 
 import enteties.Share;
 
 import java.util.List;
 
 public interface ShareDAO {
-    void create(Share sh, int idbuyer);
+    void create(Share sh, int idCompany, int idBuyer);
 
     List<Share> findAllShares();
 

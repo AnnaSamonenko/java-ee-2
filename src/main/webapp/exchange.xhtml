@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h1>Exchange:</h1>
+    <h:dataTable value="#{exchangeBean.findAllExchanges()}" var="i" border="1">
+
+        <h:column>
+            <f:facet name="header">
+                id
+            </f:facet>
+            #{i.id}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Name of exchange
+            </f:facet>
+            #{i.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                Stocks
+            </f:facet>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
+        </h:column>
+    </h:dataTable>
+
+    <h1>Add new exchange:</h1>
+    <h:form>
+        Exchange name: <h:inputText value="#{exchange.name}"/><br/><br/>
+        <h:commandButton value="Add exchange" action="#{exchangeBean.create(exchange)}"/>
+    </h:form>
+
+    <h1>Update info about exchange:</h1>
+    Name of exchange: <h:inputText value="#{exchange.name}"/><br/><br/>
+    ID of exchange: <h:inputText value="#{exchange.id}"/><br/><br/>
+    <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
+
+    <h1>Delete Exchange:</h1>
+    <h:form>
+        ID: <h:inputText value="#{exchange.id}"/><br/><br/>
+        <h:commandButton value="Delete" action="#{exchangeBean.delete(exchange.id)}"/>
+    </h:form>
+</f:view>
+</html>

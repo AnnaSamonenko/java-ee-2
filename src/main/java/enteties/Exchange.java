@@ -12,11 +12,11 @@ public class Exchange {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idexchange")
-    private int idexchange;
+    @Column(name = "id_exchange")
+    private int id;
 
-    @Column(name = "nameexchange")
-    private String nameexchange;
+    @Column(name = "name_exchange")
+    private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "exchanges")
     private List<Share> shares = new ArrayList<>();
@@ -24,25 +24,25 @@ public class Exchange {
     public Exchange() {
     }
 
-    public Exchange(String nameexchange, List<Share> shares) {
-        this.nameexchange = nameexchange;
+    public Exchange(String name, List<Share> shares) {
+        this.name = name;
         this.shares = shares;
     }
 
-    public int getIdexchange() {
-        return idexchange;
+    public int getId() {
+        return id;
     }
 
-    public void setIdexchange(int idexchange) {
-        this.idexchange = idexchange;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNameexchange() {
-        return nameexchange;
+    public String getName() {
+        return name;
     }
 
-    public void setNameexchange(String nameexchange) {
-        this.nameexchange = nameexchange;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Share> getShares() {

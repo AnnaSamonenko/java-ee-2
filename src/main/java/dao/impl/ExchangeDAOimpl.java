@@ -1,9 +1,9 @@
-package dao;
+package dao.impl;
 
+import dao.interfaces.ExchangeDAO;
 import enteties.Exchange;
 import org.apache.log4j.Logger;
 
-import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,11 +11,10 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "exchangeBean")
 public class ExchangeDAOimpl implements ExchangeDAO {
     private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Share");
     private EntityManager entitymanager = emfactory.createEntityManager();
-    private static final Logger log = Logger.getLogger(BuyerDAOimpl.class);
+    private static final Logger log = Logger.getLogger(ExchangeDAOimpl.class);
 
     /**
      * Create exchange
@@ -27,7 +26,6 @@ public class ExchangeDAOimpl implements ExchangeDAO {
         entitymanager.persist(exchange);
         entitymanager.getTransaction().commit();
         entitymanager.close();
-        log.info("Create buyer: " + exchange.getIdexchange() + " " + exchange.getNameexchange());
     }
 
     /**
@@ -47,7 +45,7 @@ public class ExchangeDAOimpl implements ExchangeDAO {
     public void update(int id, Exchange update) {
         EntityManager entitymanager = emfactory.createEntityManager();
         Exchange ex = entitymanager.find(Exchange.class, id);
-        ex.setNameexchange(update.getNameexchange());
+        ex.setName(update.getName());
         entitymanager.getTransaction().begin();
         entitymanager.persist(ex);
         entitymanager.getTransaction().commit();

@@ -1,18 +1,11 @@
 package enteties;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
-import java.math.BigDecimal;
-
-/**
- * Created by Анна on 2/11/2016.
- */
 
 @Entity
 @Table(name = "bank_account")
-@ManagedBean(name = "bank_account")
-@RequestScoped
+@ManagedBean(name = "bankAccount")
 public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,21 +13,20 @@ public class BankAccount {
     private int idBankAccount;
 
     @Column(name = "money_on_bank_account")
-    private BigDecimal moneyOnBankAccount;
+    private int moneyOnBankAccount;
 
     public BankAccount() {
-        moneyOnBankAccount = new BigDecimal(0);
     }
 
-    public BankAccount(BigDecimal moneyOnBankAccount) {
+    public BankAccount(int moneyOnBankAccount) {
         this.moneyOnBankAccount = moneyOnBankAccount;
     }
 
-    public BigDecimal getMoneyOnBankAccount() {
+    public int getMoneyOnBankAccount() {
         return moneyOnBankAccount;
     }
 
-    public void setMoneyOnBankAccount(BigDecimal moneyOnBankAccount) {
+    public void setMoneyOnBankAccount(int moneyOnBankAccount) {
         this.moneyOnBankAccount = moneyOnBankAccount;
     }
 
