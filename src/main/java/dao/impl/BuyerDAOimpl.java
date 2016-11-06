@@ -26,6 +26,7 @@ public class BuyerDAOimpl implements BuyerDAO {
     }
 
     public List<Buyer> findAllBuyers() {
+        EntityManager entitymanager = emfactory.createEntityManager();
         Query query = entitymanager.createQuery("Select b from Buyer b");
         return (ArrayList<Buyer>) query.getResultList();
     }

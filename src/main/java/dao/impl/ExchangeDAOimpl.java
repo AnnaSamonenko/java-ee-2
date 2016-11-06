@@ -32,6 +32,7 @@ public class ExchangeDAOimpl implements ExchangeDAO {
      * @return all exchanges
      */
     public List<Exchange> findAllExchanges() {
+        EntityManager entitymanager = emfactory.createEntityManager();
         Query query = entitymanager.createQuery("Select ex from Exchange ex");
         return (ArrayList<Exchange>) query.getResultList();
     }

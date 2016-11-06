@@ -6,46 +6,48 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h1>Exchange:</h1>
-    <h:dataTable value="#{exchangeBean.findAllExchanges()}" var="i" border="1">
+    <h3>Exchanges:</h3>
+    <h:dataTable id="exchangeTable" value="#{exchangeBean.findAllExchanges()}" var="i" border="1">
 
         <h:column>
-            <f:facet name="header">
-                id
-            </f:facet>
+            <f:facet name="header"> id </f:facet>
             #{i.id}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Name of exchange
-            </f:facet>
+            <f:facet name="header"> Name of exchange </f:facet>
             #{i.name}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Stocks
-            </f:facet>
+            <f:facet name="header"> Stocks </f:facet>
             <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
         </h:column>
     </h:dataTable>
 
-    <h1>Add new exchange:</h1>
-    <h:form>
+    <h3>Add new exchange:</h3>
+    <h:form id="addExchange">
         Exchange name: <h:inputText value="#{exchange.name}"/><br/><br/>
-        <h:commandButton value="Add exchange" action="#{exchangeBean.create(exchange)}"/>
+        <h:commandButton value="Add exchange" action="#{exchangeBean.create(exchange)}">
+            <f:ajax execute="addExchange" render="exchangeTable"/>
+        </h:commandButton>
     </h:form>
 
-    <h1>Update info about exchange:</h1>
-    Name of exchange: <h:inputText value="#{exchange.name}"/><br/><br/>
-    ID of exchange: <h:inputText value="#{exchange.id}"/><br/><br/>
-    <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
+    <h3>Update info about exchange:</h3>
+    <h:form id="updateExchange">
+        Name of exchange: <h:inputText value="#{exchange.name}"/><br/><br/>
+        ID of exchange: <h:inputText value="#{exchange.id}"/><br/><br/>
+        <h:commandButton value="Update" action="#{exchangeBean.update(exchange.id, exchange)}">
+            <f:ajax execute="updateExchange" render="exchangeTable"/>
+        </h:commandButton>
+    </h:form>
 
-    <h1>Delete Exchange:</h1>
-    <h:form>
+    <h3>Delete Exchange:</h3>
+    <h:form id="deleteExchange">
         ID: <h:inputText value="#{exchange.id}"/><br/><br/>
-        <h:commandButton value="Delete" action="#{exchangeBean.delete(exchange.id)}"/>
+        <h:commandButton value="Delete" action="#{exchangeBean.delete(exchange.id)}">
+            <f:ajax execute="deleteExchange" render="exchangeTable"/>
+        </h:commandButton>
     </h:form>
 </f:view>
 </html>

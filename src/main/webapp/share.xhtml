@@ -6,72 +6,68 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h1>Shares:</h1>
-    <h:dataTable value="#{shareBean.findAllShares()}" var="i" border="1">
+    <h3>Shares:</h3>
+    <h:dataTable id="shareTable" value="#{shareBean.findAllShares()}" var="i" border="1">
 
         <h:column>
-            <f:facet name="header">
-                id
-            </f:facet>
+            <f:facet name="header">id</f:facet>
             #{i.id}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Company
-            </f:facet>
+            <f:facet name="header">Company</f:facet>
             #{i.name}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Price
-            </f:facet>
+            <f:facet name="header">Price</f:facet>
             #{i.price}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Type
-            </f:facet>
+            <f:facet name="header">Type</f:facet>
             #{i.type}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Owner
-            </f:facet>
+            <f:facet name="header">Owner</f:facet>
             #{i.buyer.surname}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Exchanges
-            </f:facet>
+            <f:facet name="header">Exchanges</f:facet>
             <ui:repeat var="item" value="#{i.exchanges}"> #{item.name}<br/> </ui:repeat>
         </h:column>
     </h:dataTable>
 
-    <h1>Add new share:</h1>
-    <h:form>
+    <h3>Add share:</h3>
+    <h:form id="addShare">
         Share price: <h:inputText value="#{share.price}"/><br/><br/>
         Share type: <h:inputText value="#{share.type}"/><br/><br/>
         Owner of share: <h:inputText value="#{share.buyer.id}"/><br/><br/>
         Company of share: <h:inputText value="#{share.company.id}"/><br/><br/>
-        <h:commandButton value="Add stock" action="#{shareBean.create(share, share.company.id, share.buyer.id)}"/>
+        <h:commandButton value="Add stock" action="#{shareBean.create(share, share.company.id, share.buyer.id)}">
+            <f:ajax execute="addShare" render="shareTable"/>
+        </h:commandButton>
     </h:form>
 
-    <h1>Update info about Share:</h1>
-    Company: <h:inputText value="#{share.company.companyName}"/><br/><br/>
-    Price: <h:inputText value="#{share.price}"/><br/><br/>
-    Type: <h:inputText value="#{share.type}"/><br/><br/>
-    ID of share: <h:inputText value="#{share.id}"/><br/><br/>
-    <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}"/>
+    <h3>Update share:</h3>
+    <h:form id="updateShare">
+        Company: <h:inputText value="#{share.company.companyName}"/><br/><br/>
+        Price: <h:inputText value="#{share.price}"/><br/><br/>
+        Type: <h:inputText value="#{share.type}"/><br/><br/>
+        ID of share: <h:inputText value="#{share.id}"/><br/><br/>
+        <h:commandButton value="Update" action="#{shareBean.update(share.id, share)}">
+            <f:ajax execute="updateShare" render="shareTable"/>
+        </h:commandButton>
+    </h:form>
 
-    <h1>Delete Share:</h1>
-    <h:form>
+    <h3>Delete share:</h3>
+    <h:form id="deleteShare">
         ID: <h:inputText value="#{share.id}"/><br/><br/>
-        <h:commandButton value="Delete" action="#{shareBean.delete(share.id)}"/>
+        <h:commandButton value="Delete" action="#{shareBean.delete(share.id)}">
+            <f:ajax execute="updateShare" render="shareTable"/>
+        </h:commandButton>
     </h:form>
 </f:view>
 </html>

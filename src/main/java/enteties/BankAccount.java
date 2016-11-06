@@ -1,5 +1,7 @@
 package enteties;
 
+import dao.interfaces.BankAccountDAO;
+
 import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
 

@@ -35,4 +35,8 @@ public class BuyerBean {
     public void delete(int buyerID) {
         buyerDAOimpl.delete(buyerID);
     }
+
+    public void update(int id, Buyer buyerUpdate){
+        buyerDAOimpl.update(id, buyerUpdate);
+    }
 }

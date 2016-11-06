@@ -29,7 +29,17 @@ public class CompanyBean {
         return companies;
     }
 
-    public void create(Company company){
+    public void create(Company company) {
         companyDAO.create(company);
     }
+
+    public void update(int id, Company company) {
+        companyDAO.update(id, company);
+    }
+
+    public void delete(int companyID) {
+        companyDAO.delete(companyID);
+    }
+
+
 }

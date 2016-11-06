@@ -6,51 +6,64 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h1>Companies:</h1>
-    <h:dataTable value="#{companyBean.findAllCompanies()}" var="i" border="1">
+    <h3>Companies:</h3>
+    <h:dataTable id="companyTable" value="#{companyBean.findAllCompanies()}" var="i" border="1">
 
         <h:column>
-            <f:facet name="header">
-                id
-            </f:facet>
+            <f:facet name="header"> id </f:facet>
             #{i.id}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Name of company
-            </f:facet>
+            <f:facet name="header"> Name of company </f:facet>
             #{i.companyName}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Location
-            </f:facet>
+            <f:facet name="header"> Location </f:facet>
             #{i.companyLocation}
         </h:column>
 
         <h:column>
-            <f:facet name="header">
-                Company foundation year
-            </f:facet>
+            <f:facet name="header"> Company foundation year </f:facet>
             #{i.companyFoundationYear}
         </h:column>
 
-        <h:column>
+        <!--<h:column>
             <f:facet name="header">
-                Company foundation year
+                Amount of shares
             </f:facet>
-            <ui:repeat var="item" value="#{i.shares}"> #{item.buyer.name}<br/> </ui:repeat>
-        </h:column>
+            #{i.shares.length}
+        </h:column> -->
     </h:dataTable>
 
-    <h1>Add company to list above:</h1>
-    <h:form>
+    <h3>Add company:</h3>
+    <h:form id="addCompany">
         Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
         Company location: <h:inputText value="#{company.companyLocation}"/><br/><br/>
         Company foundation year: <h:inputText value="#{company.companyFoundationYear}"/><br/><br/>
-        <h:commandButton value="Add stock" action="#{companyBean.create(company)}"/>
+        <h:commandButton value="Add" action="#{companyBean.create(company)}">
+            <f:ajax execute="addCompany" render="companyTable"/>
+        </h:commandButton>
+    </h:form>
+
+    <h3>Update company:</h3>
+    <h:form id="updateCompany">
+        Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
+        Company location: <h:inputText value="#{company.companyLocation}"/><br/><br/>
+        Company foundation year: <h:inputText value="#{company.companyFoundationYear}"/><br/><br/>
+        Company id: <h:inputText value="#{company.id}"/><br/><br/>
+        <h:commandButton value="Update" action="#{companyBean.update(company.id, company)}">
+            <f:ajax execute="updateCompany" render="companyTable"/>
+        </h:commandButton>
+    </h:form>
+
+    <h3>Delete company:</h3>
+    <h:form id="deleteCompany">
+        Company id: <h:inputText value="#{company.id}"/><br/><br/>
+        <h:commandButton value="Delete" action="#{companyBean.delete(company.id)}">
+            <f:ajax execute="deleteCompany" render="companyTable"/>
+        </h:commandButton>
     </h:form>
 </f:view>
 </html>

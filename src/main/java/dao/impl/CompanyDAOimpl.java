@@ -22,6 +22,7 @@ public class CompanyDAOimpl implements CompanyDAO {
     }
 
     public List<Company> findAllCompanies() {
+        EntityManager entitymanager = entityManagerFactory.createEntityManager();
         Query query = entitymanager.createQuery("Select company from Company company");
         return (ArrayList<Company>) query.getResultList();
     }

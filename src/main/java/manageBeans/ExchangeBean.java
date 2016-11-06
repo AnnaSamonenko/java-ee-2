@@ -32,6 +32,10 @@ public class ExchangeBean {
         exchangeDAOimpl.create(exchange);
     }
 
+    public void update(int id, Exchange exchange) {
+        exchangeDAOimpl.update(id, exchange);
+    }
+
     public void delete(int exchangeID) {
         exchangeDAOimpl.delete(exchangeID);
     }

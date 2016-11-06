@@ -19,6 +19,9 @@ public class BankAccountBean {
     @ManagedProperty(value = "#{operationMoney}")
     int operationMoney;
 
+    BuyerDAO buyerDAOimpl = new BuyerDAOimpl();
+    BankAccountDAO bankAccountDAO = new BankAccountDAOimpl();
+
     public BankAccount getBankAccount() {
         return bankAccount;
     }
@@ -35,8 +38,11 @@ public class BankAccountBean {
         this.operationMoney = operationMoney;
     }
 
+    public void create(int buyerID) {
+        bankAccountDAO.create(buyerID);
+    }
+
     public void addMoney(int buyerID, int moneyToAdd) {
-        BuyerDAO buyerDAOimpl = new BuyerDAOimpl();
         Buyer buyerUpdate = buyerDAOimpl.read(buyerID);
         BankAccount bankAccount = buyerUpdate.getBankAccount();
         bankAccount.setMoneyOnBankAccount(bankAccount.getMoneyOnBankAccount() + moneyToAdd);
