@@ -21,7 +21,7 @@
 
         <h:column>
             <f:facet name="header"> Stocks </f:facet>
-            <ui:repeat var="item" value="#{i.shares}"> #{item.company.companyName}<br/> </ui:repeat>
+            <ui:repeat var="item" value="#{i.shares}">#{item.id} - #{item.company.companyName}<br/> </ui:repeat>
         </h:column>
     </h:dataTable>
     <hr/>
@@ -46,6 +46,16 @@
     <h:form id="deleteExchange">
         ID: <h:inputText value="#{exchange.id}"/><br/><br/>
         <h:commandButton value="Delete" action="#{exchangeBean.delete(exchange.id)}">
+            <f:ajax execute="deleteExchange" render="exchangeTable"/>
+        </h:commandButton>
+    </h:form>
+
+    <h3>Buy share: </h3>
+    <h:form>
+        ID of share: <h:inputText value="#{share.id}"/><br/><br/>
+
+        ID of buyer: <h:inputText value="#{buyer.id}"/><br/><br/>
+        <h:commandButton value="Buy share" action="#{(exchange.id, )}">
             <f:ajax execute="deleteExchange" render="exchangeTable"/>
         </h:commandButton>
     </h:form>
