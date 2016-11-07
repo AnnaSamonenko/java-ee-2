@@ -16,7 +16,7 @@ public class Share {
     private int id;
 
     @Column(name = "share_price")
-    private BigDecimal price;
+    private int price;
 
     @Column(name = "share_type")
     private String type;
@@ -41,7 +41,7 @@ public class Share {
         company = new Company();
     }
 
-    public Share(BigDecimal price, String type, Buyer buyer, Company company, List<Exchange> exchanges) {
+    public Share(int price, String type, Buyer buyer, Company company, List<Exchange> exchanges) {
         this.price = price;
         this.type = type;
         this.buyer = buyer;
@@ -73,11 +73,11 @@ public class Share {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

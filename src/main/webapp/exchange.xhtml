@@ -49,14 +49,15 @@
             <f:ajax execute="deleteExchange" render="exchangeTable"/>
         </h:commandButton>
     </h:form>
-
-    <h3>Buy share: </h3>
+    <hr/>
+    <h3 id="buyShare">Buy share: </h3>
     <h:form>
         ID of share: <h:inputText value="#{share.id}"/><br/><br/>
 
         ID of buyer: <h:inputText value="#{buyer.id}"/><br/><br/>
-        <h:commandButton value="Buy share" action="#{(exchange.id, )}">
-            <f:ajax execute="deleteExchange" render="exchangeTable"/>
+
+        <h:commandButton value="Buy share" action="#{buyBean.buy(buyer.id, share.id)}">
+            <!--<f:ajax execute="buyShare" render="exchangeTable"/>-->
         </h:commandButton>
     </h:form>
 </f:view>
