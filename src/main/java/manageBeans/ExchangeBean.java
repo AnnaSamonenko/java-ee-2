@@ -1,7 +1,9 @@
 package manageBeans;
 
 import dao.impl.ExchangeDAOimpl;
+import dao.impl.ShareDAOimpl;
 import enteties.Exchange;
+import enteties.Share;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -14,6 +16,7 @@ public class ExchangeBean {
     Exchange exchange = new Exchange();
 
     private ExchangeDAOimpl exchangeDAOimpl = new ExchangeDAOimpl();
+    private ShareDAOimpl shareDAOimpl = new ShareDAOimpl();
 
     public List<Exchange> findAllExchanges() {
         List exchenges = exchangeDAOimpl.findAllExchanges();
@@ -38,5 +41,12 @@ public class ExchangeBean {
 
     public void delete(int exchangeID) {
         exchangeDAOimpl.delete(exchangeID);
+    }
+
+    public void addShare(int exchangeID, int shareID) {
+        Exchange exchange = exchangeDAOimpl.read(exchangeID);
+        Share share = shareDAOimpl.read(shareID);
+        exchangeDAOimpl.update(exchangeID, share);
+        shareDAOimpl.update(shareID, exchange);
     }
 }

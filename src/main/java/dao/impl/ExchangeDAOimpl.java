@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.interfaces.ExchangeDAO;
 import enteties.Exchange;
+import enteties.Share;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
@@ -54,6 +55,16 @@ public class ExchangeDAOimpl implements ExchangeDAO {
         log.info("Update exchange with id: " + id);
     }
 
+    public void update(int exchangeId, Share share) {
+        EntityManager entitymanager = emfactory.createEntityManager();
+        Exchange ex = entitymanager.find(Exchange.class, exchangeId);
+        entitymanager.getTransaction().begin();
+        ex.getShares().add(share);
+        entitymanager.persist(ex);
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
+        log.info("Update exchange with id: " + exchangeId);
+    }
     /**
      * Delete exchanges by id
      *

@@ -29,14 +29,14 @@
             #{i.companyFoundationYear}
         </h:column>
 
-        <!--<h:column>
+        <h:column>
             <f:facet name="header">
                 Amount of shares
             </f:facet>
-            #{i.shares.length}
-        </h:column> -->
+            #{i.shares.size()}
+        </h:column>
     </h:dataTable>
-
+    <hr/>
     <h3>Add company:</h3>
     <h:form id="addCompany">
         Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
@@ -46,7 +46,7 @@
             <f:ajax execute="addCompany" render="companyTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Update company:</h3>
     <h:form id="updateCompany">
         Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
@@ -57,7 +57,7 @@
             <f:ajax execute="updateCompany" render="companyTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Delete company:</h3>
     <h:form id="deleteCompany">
         Company id: <h:inputText value="#{company.id}"/><br/><br/>

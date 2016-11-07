@@ -25,18 +25,21 @@ public class Share {
     @JoinColumn(name = "idbuyer")
     private Buyer buyer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "stock_exchange", joinColumns = {
             @JoinColumn(name = "idstock", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "idexchange",
                     nullable = false, updatable = false)})
     private List<Exchange> exchanges = new ArrayList<>();
 
-    public Share(){}
+    public Share(){
+        buyer = new Buyer();
+        company = new Company();
+    }
 
     public Share(BigDecimal price, String type, Buyer buyer, Company company, List<Exchange> exchanges) {
         this.price = price;

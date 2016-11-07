@@ -30,7 +30,7 @@ public class ShareBean {
         this.share = share;
     }
 
-    public void create(Share share,int companyID, int buyerID) {
+    public void create(Share share, int companyID, int buyerID) {
         shareDAOimpl.create(share, companyID, buyerID);
     }
 

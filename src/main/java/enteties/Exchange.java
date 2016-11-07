@@ -18,7 +18,7 @@ public class Exchange {
     @Column(name = "name_exchange")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "exchanges")
+    @ManyToMany(mappedBy = "exchanges", fetch = FetchType.EAGER)
     private List<Share> shares = new ArrayList<>();
 
     public Exchange() {

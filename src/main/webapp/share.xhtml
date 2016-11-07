@@ -16,7 +16,7 @@
 
         <h:column>
             <f:facet name="header">Company</f:facet>
-            #{i.name}
+            #{i.company.companyName}
         </h:column>
 
         <h:column>
@@ -39,7 +39,7 @@
             <ui:repeat var="item" value="#{i.exchanges}"> #{item.name}<br/> </ui:repeat>
         </h:column>
     </h:dataTable>
-
+    <hr/>
     <h3>Add share:</h3>
     <h:form id="addShare">
         Share price: <h:inputText value="#{share.price}"/><br/><br/>
@@ -50,7 +50,7 @@
             <f:ajax execute="addShare" render="shareTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Update share:</h3>
     <h:form id="updateShare">
         Company: <h:inputText value="#{share.company.companyName}"/><br/><br/>
@@ -61,7 +61,7 @@
             <f:ajax execute="updateShare" render="shareTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Delete share:</h3>
     <h:form id="deleteShare">
         ID: <h:inputText value="#{share.id}"/><br/><br/>

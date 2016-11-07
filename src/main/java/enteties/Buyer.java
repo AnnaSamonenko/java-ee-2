@@ -23,7 +23,7 @@ public class Buyer {
     @Column(name = "buyer_address")
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "buyer")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "buyer")
     private List<Share> shares = new LinkedList<>();
 
     @OneToOne(cascade = CascadeType.PERSIST)

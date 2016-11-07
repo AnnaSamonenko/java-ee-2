@@ -21,10 +21,10 @@
 
         <h:column>
             <f:facet name="header"> Stocks </f:facet>
-            <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.company.companyName}<br/> </ui:repeat>
         </h:column>
     </h:dataTable>
-
+    <hr/>
     <h3>Add new exchange:</h3>
     <h:form id="addExchange">
         Exchange name: <h:inputText value="#{exchange.name}"/><br/><br/>
@@ -32,7 +32,7 @@
             <f:ajax execute="addExchange" render="exchangeTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Update info about exchange:</h3>
     <h:form id="updateExchange">
         Name of exchange: <h:inputText value="#{exchange.name}"/><br/><br/>
@@ -41,7 +41,7 @@
             <f:ajax execute="updateExchange" render="exchangeTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Delete Exchange:</h3>
     <h:form id="deleteExchange">
         ID: <h:inputText value="#{exchange.id}"/><br/><br/>

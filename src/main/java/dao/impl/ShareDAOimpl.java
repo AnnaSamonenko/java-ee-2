@@ -1,6 +1,9 @@
 package dao.impl;
 
 import dao.interfaces.ShareDAO;
+import enteties.Buyer;
+import enteties.Company;
+import enteties.Exchange;
 import enteties.Share;
 import org.apache.log4j.Logger;
 
@@ -17,14 +20,16 @@ public class ShareDAOimpl implements ShareDAO {
     // logging
     private static final Logger log = Logger.getLogger(ShareDAOimpl.class);
 
-    public void create(Share sh, int idCompany, int idBuyer) {
-//        EntityManager entitymanager = emfactory.createEntityManager();
-//        entitymanager.getTransaction().begin();
-//        Buyer b = entitymanager.find(Buyer.class, idBuyer);
-//        b.getShares().add(sh);
-//        entitymanager.persist(sh);
-//        entitymanager.getTransaction().commit();
-//        entitymanager.close();
+    public void create(Share share, int idCompany, int idBuyer) {
+        EntityManager entitymanager = emfactory.createEntityManager();
+        entitymanager.getTransaction().begin();
+        Buyer buyer = entitymanager.find(Buyer.class, idBuyer);
+        Company company = entitymanager.find(Company.class, idCompany);
+        buyer.getShares().add(share);
+        company.getShares().add(share);
+        entitymanager.persist(share);
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
     }
 
     public void update(int id, Share update) {
@@ -34,6 +39,17 @@ public class ShareDAOimpl implements ShareDAO {
         sh.setPrice(update.getPrice());
         entitymanager.getTransaction().begin();
         entitymanager.persist(sh);
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
+        log.info("Update stock with id: " + id);
+    }
+
+    public void update(int id, Exchange exchange) {
+        EntityManager entitymanager = emfactory.createEntityManager();
+        Share share = entitymanager.find(Share.class, id);
+        share.getExchanges().add(exchange);
+        entitymanager.getTransaction().begin();
+        entitymanager.persist(share);
         entitymanager.getTransaction().commit();
         entitymanager.close();
         log.info("Update stock with id: " + id);

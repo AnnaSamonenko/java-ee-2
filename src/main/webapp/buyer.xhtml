@@ -31,7 +31,7 @@
 
         <h:column id="stocks">
             <f:facet name="header"> Stocks </f:facet>
-            <ui:repeat var="item" value="#{i.shares}"> #{item.name}<br/> </ui:repeat>
+            <ui:repeat var="item" value="#{i.shares}"> #{item.id} - #{item.company.companyName}<br/> </ui:repeat>
         </h:column>
 
         <h:column id="bankAccount">
@@ -39,7 +39,7 @@
             #{i.bankAccount.moneyOnBankAccount}
         </h:column>
     </h:dataTable>
-
+    <hr/>
     <h3>Add new owners: </h3>
     <h:form id="addNewOwner">
         Name of owner:<h:inputText id="inputOwner" value="#{buyer.name}"/><br/><br/>
@@ -49,7 +49,7 @@
             <f:ajax execute="addNewOwner" render="ownerTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Update Info about Owner:</h3>
     <h:form id="updateOwner">
         Name: <h:inputText value="#{buyer.name}"/><br/><br/>
@@ -61,7 +61,7 @@
             <f:ajax execute="updateOwner" render="ownerTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Delete owner:</h3>
     <h:form id="deleteOwner">
         ID: <h:inputText value="#{buyer.id}"/><br/><br/>
@@ -69,13 +69,13 @@
             <f:ajax execute="deleteOwner" render="ownerTable"/>
         </h:commandButton>
     </h:form>
-
+    <hr/>
     <h3>Add bank account: </h3>
     <h:form>
         Input id of Buyer, that you want add bank account: <h:inputText value="#{buyer.id}"/><br/><br/>
         <h:commandButton value="Add bank account to buyer" action="#{bankAccountBean.create(buyer.id)}"/>
     </h:form>
-
+    <hr/>
     <h3>Add money on bank account: </h3>
     <h:form>
         Input id of Buyer, that you want to add money: <h:inputText value="#{buyer.id}"/><br/><br/>
@@ -84,5 +84,25 @@
         <h:commandButton value="Add money on account of buyer"
                          action="#{bankAccountBean.addMoney(buyer.id, bankAccountBean.operationMoney)}"/>
     </h:form>
+    <hr/>
+    <!--Put share on exchange-->
+    <h3> Sell share: </h3>
+    <h:form>
+        Input id of share:<h:inputText value="#{share.id}"/><br/><br/>
+        <!--<h:selectOneMenu value="#{shareBean.findAllShares().get(0)}">-->
+        <!--<f:selectItems value="#{shareBean.findAllShares()}" var="_sh" itemValue="#{_sh.id}"-->
+        <!--itemLabel="#{_sh.id}"/>-->
+        <!--</h:selectOneMenu>-->
+        <br/>
+        Input exchange where you want to put share: <h:inputText value="#{exchange.id}"/><br/><br/>
+        <!--<h:selectOneMenu value="#{exchangeBean.findAllExchanges().get(0).name}">-->
+            <!--<f:selectItems value="#{exchangeBean.findAllExchanges()}" var="_exchange" itemValue="#{_exchange.id}"-->
+                           <!--itemLabel="#{_exchange.name}"/>-->
+        <!--</h:selectOneMenu>-->
+
+        <h:commandButton value="Put share on exchange" action="#{exchangeBean.addShare(exchange.id, share.id)}"/>
+    </h:form>
+    <br/>
+    <br/>
 </f:view>
 </html>
