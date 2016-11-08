@@ -2,7 +2,6 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="Share">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>enteties.Share</class>
         <class>enteties.BankAccount</class>
         <class>enteties.Buyer</class>

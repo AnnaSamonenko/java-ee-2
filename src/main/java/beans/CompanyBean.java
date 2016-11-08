@@ -1,4 +1,4 @@
-package manageBeans;
+package beans;
 
 import dao.impl.CompanyDAOimpl;
 import dao.interfaces.CompanyDAO;
@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import java.util.List;
 
 @ManagedBean(name = "companyBean")
-public class CompanyBean {
+public class CompanyBean /*implements Converter*/{
 
     @ManagedProperty(value = "#{company}")
     private Company company = new Company();

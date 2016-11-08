@@ -9,7 +9,7 @@ public interface ShareDAO {
 
     List<Share> findAllShares();
 
-    void update(int id, Share sh);
+    void update(int id, int price);
 
     void delete(int id);
 

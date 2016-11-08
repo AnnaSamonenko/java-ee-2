@@ -6,14 +6,37 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title> Display shares </title>
+    <title> Index </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
 </h:head>
 <h:body>
-    <h1>Hi, it's my 4 lab work:</h1>
-    <h3>- <h:link value="Share page" outcome="share"/></h3>
-    <h3>- <h:link value="Company page" outcome="company"/></h3>
-    <h3>- <h:link value="Owners page" outcome="buyer"/> </h3>
-    <h3>- <h:link value="Exchange page" outcome="exchange"/></h3>
-    <h3>- <h:link value="Search page" outcome="search"/></h3>
+    <div class="container">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-brand">
+                Index
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li>
+                        <h:link value="Shares" outcome="share"/>
+                    </li>
+                    <li>
+                        <h:link value="Companies" outcome="company"/>
+                    </li>
+
+                    <li>
+                        <h:link value="Owners" outcome="buyer"/>
+                    </li>
+
+                    <li>
+                        <h:link value="Exchanges" outcome="exchange"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </h:body>
 </html>

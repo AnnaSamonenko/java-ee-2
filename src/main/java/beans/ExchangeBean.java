@@ -1,4 +1,4 @@
-package manageBeans;
+package beans;
 
 import dao.impl.ExchangeDAOimpl;
 import dao.impl.ShareDAOimpl;

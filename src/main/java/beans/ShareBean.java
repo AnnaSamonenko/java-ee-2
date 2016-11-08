@@ -1,4 +1,4 @@
-package manageBeans;
+package beans;
 
 import dao.impl.ShareDAOimpl;
 import enteties.Share;
@@ -36,5 +36,9 @@ public class ShareBean {
 
     public void delete(int shareID) {
         shareDAOimpl.delete(shareID);
+    }
+
+    public void update(int shareID, int newPrice) {
+        shareDAOimpl.update(shareID, newPrice);
     }
 }

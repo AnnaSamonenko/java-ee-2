@@ -5,65 +5,151 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h3>Companies:</h3>
-    <h:dataTable id="companyTable" value="#{companyBean.findAllCompanies()}" var="i" border="1">
+<h:head>
+    <title>Owners</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <title>Companies</title>
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-brand">
+                Companies
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h:dataTable id="companyTable" class="table table-bordered table-striped"
+                             value="#{companyBean.findAllCompanies()}" var="i" border="1">
+                    <h:column>
+                        <f:facet name="header"> id </f:facet>
+                        #{i.id}
+                    </h:column>
 
-        <h:column>
-            <f:facet name="header"> id </f:facet>
-            #{i.id}
-        </h:column>
+                    <h:column>
+                        <f:facet name="header"> Name of company </f:facet>
+                        #{i.companyName}
+                    </h:column>
 
-        <h:column>
-            <f:facet name="header"> Name of company </f:facet>
-            #{i.companyName}
-        </h:column>
+                    <h:column>
+                        <f:facet name="header"> Location </f:facet>
+                        #{i.companyLocation}
+                    </h:column>
 
-        <h:column>
-            <f:facet name="header"> Location </f:facet>
-            #{i.companyLocation}
-        </h:column>
+                    <h:column>
+                        <f:facet name="header"> Company foundation year </f:facet>
+                        #{i.companyFoundationYear}
+                    </h:column>
 
-        <h:column>
-            <f:facet name="header"> Company foundation year </f:facet>
-            #{i.companyFoundationYear}
-        </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Amount of shares
+                        </f:facet>
+                        #{i.shares.size()}
+                    </h:column>
+                </h:dataTable>
+                <hr/>
 
-        <h:column>
-            <f:facet name="header">
-                Amount of shares
-            </f:facet>
-            #{i.shares.size()}
-        </h:column>
-    </h:dataTable>
-    <hr/>
-    <h3>Add company:</h3>
-    <h:form id="addCompany">
-        Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
-        Company location: <h:inputText value="#{company.companyLocation}"/><br/><br/>
-        Company foundation year: <h:inputText value="#{company.companyFoundationYear}"/><br/><br/>
-        <h:commandButton value="Add" action="#{companyBean.create(company)}">
-            <f:ajax execute="addCompany" render="companyTable"/>
-        </h:commandButton>
-    </h:form>
-    <hr/>
-    <h3>Update company:</h3>
-    <h:form id="updateCompany">
-        Company name: <h:inputText value="#{company.companyName}"/><br/><br/>
-        Company location: <h:inputText value="#{company.companyLocation}"/><br/><br/>
-        Company foundation year: <h:inputText value="#{company.companyFoundationYear}"/><br/><br/>
-        Company id: <h:inputText value="#{company.id}"/><br/><br/>
-        <h:commandButton value="Update" action="#{companyBean.update(company.id, company)}">
-            <f:ajax execute="updateCompany" render="companyTable"/>
-        </h:commandButton>
-    </h:form>
-    <hr/>
-    <h3>Delete company:</h3>
-    <h:form id="deleteCompany">
-        Company id: <h:inputText value="#{company.id}"/><br/><br/>
-        <h:commandButton value="Delete" action="#{companyBean.delete(company.id)}">
-            <f:ajax execute="deleteCompany" render="companyTable"/>
-        </h:commandButton>
-    </h:form>
-</f:view>
+                <!-- Add company-->
+                <h:form id="addCompany" styleClass="form-horizontal">
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company Name" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.companyName}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company Location" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.companyLocation}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company foundation year" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control"
+                                         value="#{company.companyFoundationYear}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton value="Add" styleClass="btn btn-default"
+                                             action="#{companyBean.create(company)}">
+                                <f:ajax execute="addCompany" render="companyTable"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                <hr/>
+
+                <!--Update company-->
+                <h:form id="updateCompany" styleClass="form-horizontal">
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company Name" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.companyName}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company Location" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.companyLocation}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company foundation year: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.companyFoundationYear}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Company id: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton styleClass="btn btn-default" value="Update"
+                                             action="#{companyBean.update(company.id, company)}">
+                                <f:ajax execute="updateCompany" render="companyTable"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                <hr/>
+
+                <!--Delete company:-->
+                <h:form id="deleteCompany" styleClass="form-horizontal">
+                    <div class="form-group">
+                        <h:outputLabel value="Company id" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{company.id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton value="Delete" styleClass="btn btn-default"
+                                             action="#{companyBean.delete(company.id)}">
+                                <f:ajax execute="deleteCompany" render="companyTable"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                <hr/>
+            </div>
+        </div>
+    </div>
+</h:body>
 </html>

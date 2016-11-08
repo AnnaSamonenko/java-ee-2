@@ -1,4 +1,4 @@
-package manageBeans;
+package beans;
 
 import dao.impl.BuyerDAOimpl;
 import enteties.Buyer;

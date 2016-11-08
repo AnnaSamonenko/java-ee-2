@@ -5,60 +5,141 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h3>Exchanges:</h3>
-    <h:dataTable id="exchangeTable" value="#{exchangeBean.findAllExchanges()}" var="i" border="1">
+<h:head>
+    <title>Exchanges</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+</h:head>
 
-        <h:column>
-            <f:facet name="header"> id </f:facet>
-            #{i.id}
-        </h:column>
+<h:body>
+    <div class="container">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-brand">
+                Exchanges
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h:dataTable id="exchangeTable" class="table table-bordered table-striped"
+                             value="#{exchangeBean.findAllExchanges()}" var="i" border="1">
 
-        <h:column>
-            <f:facet name="header"> Name of exchange </f:facet>
-            #{i.name}
-        </h:column>
+                    <h:column>
+                        <f:facet name="header"> id </f:facet>
+                        #{i.id}
+                    </h:column>
 
-        <h:column>
-            <f:facet name="header"> Stocks </f:facet>
-            <ui:repeat var="item" value="#{i.shares}">#{item.id} - #{item.company.companyName}<br/> </ui:repeat>
-        </h:column>
-    </h:dataTable>
-    <hr/>
-    <h3>Add new exchange:</h3>
-    <h:form id="addExchange">
-        Exchange name: <h:inputText value="#{exchange.name}"/><br/><br/>
-        <h:commandButton value="Add exchange" action="#{exchangeBean.create(exchange)}">
-            <f:ajax execute="addExchange" render="exchangeTable"/>
-        </h:commandButton>
-    </h:form>
-    <hr/>
-    <h3>Update info about exchange:</h3>
-    <h:form id="updateExchange">
-        Name of exchange: <h:inputText value="#{exchange.name}"/><br/><br/>
-        ID of exchange: <h:inputText value="#{exchange.id}"/><br/><br/>
-        <h:commandButton value="Update" action="#{exchangeBean.update(exchange.id, exchange)}">
-            <f:ajax execute="updateExchange" render="exchangeTable"/>
-        </h:commandButton>
-    </h:form>
-    <hr/>
-    <h3>Delete Exchange:</h3>
-    <h:form id="deleteExchange">
-        ID: <h:inputText value="#{exchange.id}"/><br/><br/>
-        <h:commandButton value="Delete" action="#{exchangeBean.delete(exchange.id)}">
-            <f:ajax execute="deleteExchange" render="exchangeTable"/>
-        </h:commandButton>
-    </h:form>
-    <hr/>
-    <h3 id="buyShare">Buy share: </h3>
-    <h:form>
-        ID of share: <h:inputText value="#{share.id}"/><br/><br/>
+                    <h:column>
+                        <f:facet name="header"> Name of exchange </f:facet>
+                        #{i.name}
+                    </h:column>
 
-        ID of buyer: <h:inputText value="#{buyer.id}"/><br/><br/>
+                    <h:column>
+                        <f:facet name="header"> Stocks </f:facet>
+                        <ui:repeat var="item" value="#{i.shares}">#{item.id} - #{item.company.companyName}<br/>
+                        </ui:repeat>
+                    </h:column>
+                </h:dataTable>
+                <hr/>
 
-        <h:commandButton value="Buy share" action="#{buyBean.buy(buyer.id, share.id)}">
-            <!--<f:ajax execute="buyShare" render="exchangeTable"/>-->
-        </h:commandButton>
-    </h:form>
-</f:view>
+                <!-- Add new exchange: -->
+                <h:form id="addExchange" styleClass="form-horizontal">
+
+                    <div class="form-group">
+                        <h:outputLabel value="Exchange name: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{exchange.name}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton value="Add exchange" styleClass="btn btn-default"
+                                             action="#{exchangeBean.create(exchange)}">
+                                <f:ajax execute="addExchange" render="exchangeTable"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                <hr/>
+
+                <!--Update info about exchange:-->
+                <h:form id="updateExchange" styleClass="form-horizontal">
+                    <div class="form-group">
+                        <h:outputLabel value="Exchange name: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{exchange.name}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Id of exchange: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{exchange.id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton value="Update" styleClass="btn btn-default"
+                                             action="#{exchangeBean.update(exchange.id, exchange)}">
+                                <f:ajax execute="updateExchange" render="exchangeTable"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+                <hr/>
+
+                <!--Delete Exchange:-->
+                <h:form id="deleteExchange" styleClass="form-horizontal">
+
+                    <div class="form-group">
+                        <h:outputLabel value="Id of exchange: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{exchange.id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton value="Delete" styleClass="btn btn-default"
+                                             action="#{exchangeBean.delete(exchange.id)}">
+                                <f:ajax execute="deleteExchange" render="exchangeTable"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+
+
+                </h:form>
+                <hr/>
+
+                <!-- Buy share: -->
+                <h:form id="buyShare" styleClass="form-horizontal">
+
+                    <div class="form-group">
+                        <h:outputLabel value="ID of share:" styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{share.id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="ID of buyer: " styleClass="control-label col-sm-2"/>
+                        <div class="col-sm-10">
+                            <h:inputText styleClass="form-control" value="#{buyer.id}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <h:commandButton value="Buy share" styleClass="btn btn-default"
+                                             action="#{buyBean.buy(buyer.id, share.id)}">
+                                <!--<f:ajax execute="buyShare" render="exchangeTable"/>-->
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
 </html>

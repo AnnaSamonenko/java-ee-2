@@ -32,13 +32,12 @@ public class ShareDAOimpl implements ShareDAO {
         entitymanager.close();
     }
 
-    public void update(int id, Share update) {
+    public void update(int id, int newPrice) {
         EntityManager entitymanager = emfactory.createEntityManager();
         Share sh = entitymanager.find(Share.class, id);
-        sh.setType(update.getType());
-        sh.setPrice(update.getPrice());
+        sh.setPrice(newPrice);
         entitymanager.getTransaction().begin();
-        entitymanager.persist(sh);
+        entitymanager.merge(sh);
         entitymanager.getTransaction().commit();
         entitymanager.close();
         log.info("Update stock with id: " + id);
