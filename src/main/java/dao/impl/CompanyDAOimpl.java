@@ -34,7 +34,7 @@ public class CompanyDAOimpl implements CompanyDAO {
         company.setCompanyLocation(update.getCompanyLocation());
         company.setCompanyFoundationYear(update.getCompanyFoundationYear());
         entitymanager.getTransaction().begin();
-        entitymanager.persist(company);
+        entitymanager.merge(company);
         entitymanager.getTransaction().commit();
         entitymanager.close();
     }

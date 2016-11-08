@@ -128,11 +128,13 @@
 
                 <!-- Delete owner-->
                 <h:form id="deleteOwner" styleClass="form-horizontal">
-
                     <div class="form-group">
-                        <h:outputLabel value="ID" styleClass="control-label col-sm-2"/>
+                        <h:outputLabel value="Buyer name: " styleClass="control-label col-sm-2"/>
                         <div class="col-sm-10">
-                            <h:inputText styleClass="form-control" value="#{buyer.id}"/>
+                            <h:selectOneMenu styleClass="form-control" value="#{buyer.id}">
+                                <f:selectItems value="#{buyerBean.findAllBuyers()}" var="buyer" itemValue="#{buyer.id}"
+                                               itemLabel="#{buyer.name} #{buyer.surname}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
 
@@ -151,9 +153,12 @@
                 <h:form styleClass="form-horizontal">
 
                     <div class="form-group">
-                        <h:outputLabel value="ID" styleClass="control-label col-sm-2"/>
+                        <h:outputLabel value="Buyer name: " styleClass="control-label col-sm-2"/>
                         <div class="col-sm-10">
-                            <h:inputText styleClass="form-control" value="#{buyer.id}"/>
+                            <h:selectOneMenu styleClass="form-control" value="#{buyer.id}">
+                                <f:selectItems value="#{buyerBean.buyersWithoutBankAccount()}" var="buyer" itemValue="#{buyer.id}"
+                                               itemLabel="#{buyer.name} #{buyer.surname}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
 
@@ -170,9 +175,12 @@
                 <h:form styleClass="form-horizontal">
 
                     <div class="form-group">
-                        <h:outputLabel value="ID" styleClass="control-label col-sm-2"/>
+                        <h:outputLabel value="Buyer name: " styleClass="control-label col-sm-2"/>
                         <div class="col-sm-10">
-                            <h:inputText styleClass="form-control" value="#{buyer.id}"/>
+                            <h:selectOneMenu styleClass="form-control" value="#{buyer.id}">
+                                <f:selectItems value="#{buyerBean.findAllBuyers()}" var="buyer" itemValue="#{buyer.id}"
+                                               itemLabel="#{buyer.name} #{buyer.surname}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
 
@@ -194,33 +202,34 @@
 
                 <!--Put share on exchange-->
                 <h:form styleClass="form-horizontal">
-
                     <div class="form-group">
                         <h:outputLabel value="ID of share: " styleClass="control-label col-sm-2"/>
                         <div class="col-sm-10">
-                            <h:inputText styleClass="form-control" value="#{share.id}"/>
+                            <h:selectOneMenu styleClass="form-control" value="#{shareId}">
+                                <f:selectItems styleClass="form-control" value="#{shareBean.findAllShares()}" var="_sh"
+                                               itemValue="#{_sh.id}"
+                                               itemLabel="#{_sh.id} - #{_sh.company.companyName}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
-                    <!--<h:selectOneMenu value="#{shareBean.findAllShares().get(0)}">-->
-                    <!--<f:selectItems value="#{shareBean.findAllShares()}" var="_sh" itemValue="#{_sh.id}"-->
-                    <!--itemLabel="#{_sh.id}"/>-->
-                    <!--</h:selectOneMenu>-->
+
                     <div class="form-group">
-                        <h:outputLabel value="Input exchange where you want to put share: "
-                                       styleClass="control-label col-sm-2"/>
+                        <h:outputLabel value="Exchange name: " styleClass="control-label col-sm-2"/>
                         <div class="col-sm-10">
-                            <h:inputText styleClass="form-control" value="#{exchange.id}"/>
+                            <h:selectOneMenu styleClass="form-control"
+                                             value="#{exchangeId}">
+                                <f:selectItems styleClass="form-control" value="#{exchangeBean.findAllExchanges()}"
+                                               var="_exchange"
+                                               itemValue="#{_exchange.id}"
+                                               itemLabel="#{_exchange.name}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
-                    <!--<h:selectOneMenu value="#{exchangeBean.findAllExchanges().get(0).name}">-->
-                    <!--<f:selectItems value="#{exchangeBean.findAllExchanges()}" var="_exchange" itemValue="#{_exchange.id}"-->
-                    <!--itemLabel="#{_exchange.name}"/>-->
-                    <!--</h:selectOneMenu>-->
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <h:commandButton value="Put share on exchange" styleClass="btn btn-default"
-                                             action="#{bankAccountBean.addMoney(buyer.id, bankAccountBean.operationMoney)}"/>
+                                             action="#{exchangeBean.addShare(exchangeId, shareId)}"/>
                         </div>
                     </div>
                 </h:form>

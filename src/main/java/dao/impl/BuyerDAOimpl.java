@@ -62,4 +62,10 @@ public class BuyerDAOimpl implements BuyerDAO {
         entitymanager.close();
         return b;
     }
+
+    public ArrayList<Buyer> buyersWithoutBankAccount(){
+        EntityManager entitymanager = emfactory.createEntityManager();
+        Query query = entitymanager.createQuery("select buyer from Buyer buyer where buyer.bankAccount is NULL");
+        return (ArrayList<Buyer>) query.getResultList();
+    }
 }

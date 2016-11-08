@@ -5,6 +5,7 @@ import enteties.Buyer;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "buyerBean")
@@ -38,5 +39,9 @@ public class BuyerBean {
 
     public void update(int id, Buyer buyerUpdate){
         buyerDAOimpl.update(id, buyerUpdate);
+    }
+
+    public ArrayList<Buyer> buyersWithoutBankAccount(){
+        return  buyerDAOimpl.buyersWithoutBankAccount();
     }
 }

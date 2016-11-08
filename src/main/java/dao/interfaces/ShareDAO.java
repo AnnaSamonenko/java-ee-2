@@ -2,6 +2,7 @@ package dao.interfaces;
 
 import enteties.Share;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ShareDAO {
@@ -14,4 +15,6 @@ public interface ShareDAO {
     void delete(int id);
 
     Share read(int id);
+
+    ArrayList<Share> sellingShare();
 }

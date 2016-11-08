@@ -48,7 +48,7 @@ public class ShareDAOimpl implements ShareDAO {
         Share share = entitymanager.find(Share.class, id);
         share.getExchanges().add(exchange);
         entitymanager.getTransaction().begin();
-        entitymanager.persist(share);
+        entitymanager.merge(share);
         entitymanager.getTransaction().commit();
         entitymanager.close();
         log.info("Update stock with id: " + id);
@@ -72,5 +72,11 @@ public class ShareDAOimpl implements ShareDAO {
         EntityManager entitymanager = emfactory.createEntityManager();
         Share sh = entitymanager.find(Share.class, id);
         return sh;
+    }
+
+    public ArrayList<Share> sellingShare(){
+        EntityManager entitymanager = emfactory.createEntityManager();
+        Query query = entitymanager.createQuery("select share from Share share where share.exchanges.size > 0");
+        return (ArrayList<Share>) query.getResultList();
     }
 }

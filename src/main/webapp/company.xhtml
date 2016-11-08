@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Owners</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
     <title>Companies</title>
@@ -132,9 +131,13 @@
                 <!--Delete company:-->
                 <h:form id="deleteCompany" styleClass="form-horizontal">
                     <div class="form-group">
-                        <h:outputLabel value="Company id" styleClass="control-label col-sm-2"/>
+                        <h:outputLabel value="Choose name of company: " styleClass="control-label col-sm-2"/>
                         <div class="col-sm-10">
-                            <h:inputText styleClass="form-control" value="#{company.id}"/>
+                            <h:selectOneMenu styleClass="form-control" value="#{company.id}">
+                                <f:selectItems value="#{companyBean.findAllCompanies()}" var="company"
+                                               itemValue="#{company.id}"
+                                               itemLabel="#{company.companyName}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
 

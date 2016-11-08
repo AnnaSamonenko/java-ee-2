@@ -6,6 +6,7 @@ import enteties.Share;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "shareBean")
@@ -40,5 +41,9 @@ public class ShareBean {
 
     public void update(int shareID, int newPrice) {
         shareDAOimpl.update(shareID, newPrice);
+    }
+
+    public ArrayList<Share> sellingShare(){
+        return shareDAOimpl.sellingShare();
     }
 }
