@@ -1,4 +1,4 @@
-#INSTALLATION
+# INSTALLATION
 1) Download latest release of Chrome Driver from https://sites.google.com/a/chromium.org/chromedriver/.
 
 2) Put the driver in defined directory. (For example, on the disk C in the folder "webdrivers").
@@ -9,7 +9,7 @@
 
 4) Restart your PC.
 
-#RUN TEST USING JUNIT 
+# RUN TEST USING JUNIT 
 1) Open Run\Debug Configurations.(by clicking on the "Edit Configuration" in the Toolbar)
 
 2) Add New Configuratiion -> JUnit(by clicking on the icon of green plus).
@@ -21,7 +21,7 @@
 	
 	For example, -ea -Denv.config="mat/dev.properties" -Dcucumber.options="--tags @as" 
 
-#RUN TESTS USING MAVEN
+# RUN TESTS USING MAVEN
 
 1) Generate runners:
 
